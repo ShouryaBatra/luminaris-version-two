@@ -7,10 +7,10 @@ import { createStudyPlanPromptBuilder, generateContent } from "./utils";
 
 function App() {
   const [promptProps, setPromptProps] = useState({
-    subject: "Mathematics",
-    subModule: "Trigonometry",
-    duration: "2 weeks",
-    grade: "9th",
+    subject: "",
+    subModule: "",
+    duration: "",
+    grade: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ function App() {
 
   function handlePromptChange(event) {
     const name = event.target.name;
-    console.log(`name`, name);
+    // console.log(`name`, name);
     const value = event.target.value;
     setPromptProps((prev) => ({
       ...prev,
