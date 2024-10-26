@@ -4,7 +4,7 @@ import Main from "./components/Main/Main";
 // import Form from './components/Form/Form'
 import { Results } from "./components/Results/Results";
 import { createStudyPlanPromptBuilder, generateContent } from "./utils";
-
+  
 function App() {
   const [promptProps, setPromptProps] = useState({
     subject: "",
