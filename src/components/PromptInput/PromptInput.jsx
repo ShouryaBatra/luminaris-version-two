@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Main.css";
+import "./PromptInput.css";
 
 export default function Main({
   promptProps,
@@ -8,9 +8,7 @@ export default function Main({
 }) {
   return (
     <>
-      <h1>Your Tutoring Experience: Welcome to Luminaris! </h1>
-      <h2> Your AI tutor, anytime, anywhere.</h2>
-
+      
       {/* FORM HTML GOES HERE */}
       <form onSubmit={handleSubmitPrompt}>
         {/* Subject */}

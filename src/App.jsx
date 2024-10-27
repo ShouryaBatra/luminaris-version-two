@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import Main from "./components/Main/Main";
 // import Form from './components/Form/Form'
-import { Results } from "./components/Results/Results";
 import { createStudyPlanPromptBuilder, generateContent } from "./utils";
+import Header from "./components/Header/Header";
+import GeneratedContent from "./components/GeneratedContent/GeneratedContent"
+import PromptInput from "./components/PromptInput/PromptInput"
   
 function App() {
   const [promptProps, setPromptProps] = useState({
@@ -52,12 +53,13 @@ function App() {
 
   return (
     <>
-      <Main
+      <Header />
+      <PromptInput
         promptProps={promptProps}
         handlePromptChange={handlePromptChange}
         handleSubmitPrompt={handleSubmitPrompt}
       />
-      <Results loading={loading} error={error} content={generatedContent} />
+      <GeneratedContent loading={loading} error={error} content={generatedContent} />
     </>
   );
 }

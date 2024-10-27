@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import "./Results.css";
+import "./GeneratedContent.css";
 
-export const Results = ({ content, loading, error }) => {
+export default function Results({ content, loading, error }) {
   if (loading) {
     return <p>Generating...</p>;
   } 
