@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./PromptInput.css";
+import "./PromptForm.css";
 
-export default function Main({
+export default function PromptForm({
   promptProps,
   handlePromptChange,
   handleSubmitPrompt,
