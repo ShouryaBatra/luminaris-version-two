@@ -1,12 +1,12 @@
-
 import { useState } from "react";
 import "../App.css";
 // import Form from '../components/Form/Form'
 import { createStudyPlanPromptBuilder, generateContent } from "../utils";
 import Header from "../components/Header/Header";
-import GeneratedContent from "../components/GeneratedContent/GeneratedContent"
-import PromptForm from "../components/PromptForm/PromptForm"
-  
+import GeneratedContent from "../components/GeneratedContent/GeneratedContent";
+import PromptForm from "../components/PromptForm/PromptForm";
+import { Button } from "@/components/ui/button";
+
 export default function PlanBuilder() {
   const [promptProps, setPromptProps] = useState({
     subject: "",
@@ -54,15 +54,19 @@ export default function PlanBuilder() {
 
   return (
     <>
+      <Button>Click me</Button>
+
       <Header />
       <PromptForm
         promptProps={promptProps}
         handlePromptChange={handlePromptChange}
         handleSubmitPrompt={handleSubmitPrompt}
       />
-      <GeneratedContent loading={loading} error={error} content={generatedContent} />
+      <GeneratedContent
+        loading={loading}
+        error={error}
+        content={generatedContent}
+      />
     </>
   );
 }
-
-
