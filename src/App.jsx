@@ -1,13 +1,11 @@
 import Login from "./routes/Login";
 import PlanBuilder from "./routes/PlanBuilder";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignUp from "./routes/SignUp";
 import ForgetPassword from "./routes/ForgetPassword";
 import VerifyEmail from "./routes/VerifyEmail";
 import UpdatePassword from "./routes/UpdatePassword";
+import { ThemeProvider } from "@/components/theme-provider";
 
 
 const router = createBrowserRouter([
@@ -39,6 +37,8 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <RouterProvider router={router} />
-  )
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
