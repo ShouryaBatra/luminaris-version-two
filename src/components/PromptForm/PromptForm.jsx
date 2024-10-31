@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function PromptForm({
   promptProps,
@@ -40,27 +49,29 @@ export default function PromptForm({
           />
 
           {/* Grade */}
-          <select
-            name="grade"
-            value={promptProps.grade}
-            onChange={handlePromptChange}
-          >
-            <option value="" disabled hidden>
-              Grade
-            </option>
-            <option value="1st">1st</option>
-            <option value="2nd">2nd</option>
-            <option value="3rd">3rd</option>
-            <option value="4th">4th</option>
-            <option value="5th">5th</option>
-            <option value="6th">6th</option>
-            <option value="7th">7th</option>
-            <option value="8th">8th</option>
-            <option value="9th">9th</option>
-            <option value="10th">10th</option>
-            <option value="11nd">11nd</option>
-            <option value="12nd">12nd</option>
-          </select>
+          
+          <Select name="grade" onValueChange={handlePromptChange("grade")}>
+            <SelectTrigger className="w-[180px]" >
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent >
+              <SelectGroup >
+                <SelectLabel>Fruits</SelectLabel>
+                <SelectItem value="1st">1st</SelectItem>
+                <SelectItem value="2nd">2nd</SelectItem>
+                <SelectItem value="3rd">3rd</SelectItem>
+                <SelectItem value="4th">4th</SelectItem>
+                <SelectItem value="5th">5th</SelectItem>
+                <SelectItem value="6th">6th</SelectItem>
+                <SelectItem value="7th">7th</SelectItem>
+                <SelectItem value="8th">8th</SelectItem>
+                <SelectItem value="9th">9th</SelectItem>
+                <SelectItem value="10th">10th</SelectItem>
+                <SelectItem value="11nd">11nd</SelectItem>
+                <SelectItem value="12nd">12nd</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
           {/* Submit Button */}
           <Button type="submit">Generate</Button>
