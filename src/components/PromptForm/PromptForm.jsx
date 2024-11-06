@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
 import {
@@ -10,11 +10,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Link } from "react-router-dom";
+import { supabase } from "@/lib/supabase";
 
 export default function PromptForm({
   promptProps,
   handlePromptChange,
   handleSubmitPrompt,
+  isAuthenticated,
 }) {
   return (
     <>
@@ -49,13 +57,13 @@ export default function PromptForm({
           />
 
           {/* Grade */}
-          
+
           <Select name="grade" onValueChange={handlePromptChange("grade")}>
             <SelectTrigger>
               <SelectValue placeholder="Select a grade" />
             </SelectTrigger>
-            <SelectContent >
-              <SelectGroup >
+            <SelectContent>
+              <SelectGroup>
                 <SelectLabel>Fruits</SelectLabel>
                 <SelectItem value="1st">1st</SelectItem>
                 <SelectItem value="2nd">2nd</SelectItem>
@@ -74,7 +82,22 @@ export default function PromptForm({
           </Select>
 
           {/* Submit Button */}
-          <Button type="submit">Generate</Button>
+
+          {isAuthenticated ? (
+            <Button type="submit">Generate</Button>
+          ) : (
+            <Popover>
+              <PopoverTrigger>
+                <Button type="button">Generate</Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <p>Log in required</p>
+                <Link to="/login">
+                  <Button>Log in</Button>
+                </Link>
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
       </form>
 

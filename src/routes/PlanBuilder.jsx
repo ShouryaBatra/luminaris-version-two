@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 // import Form from '../components/Form/Form'
 import { createStudyPlanPromptBuilder, generateContent } from "../utils";
@@ -6,9 +6,12 @@ import Header from "../components/Header/Header";
 import GeneratedContent from "../components/GeneratedContent/GeneratedContent";
 import PromptForm from "../components/PromptForm/PromptForm";
 import { Button } from "@/components/ui/button";
-
+import { signOutUser } from "@/services/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/lib/supabase";
 
 export default function PlanBuilder() {
+  const navigate = useNavigate();
   const [promptProps, setPromptProps] = useState({
     subject: "Mathematics",
     subModule: "Algebra",
@@ -20,6 +23,27 @@ export default function PlanBuilder() {
   const [error, setError] = useState(null);
   const [generatedContent, setGeneratedContent] = useState(null);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const getSession = async () => {
+    try {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession();
+
+      if (error) throw error;
+
+      setIsAuthenticated(!!session);
+    } catch (error) {
+      console.log("ProtectedRoute > getSession > Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    getSession();
+  }, []);
+
   function handlePromptChange(name, event) {
     // const name = event.target.name;
     // // console.log(`name`, name);
@@ -29,7 +53,6 @@ export default function PlanBuilder() {
     //   [name]: event,
     // }));
     console.log(event);
-    
   }
 
   const handleSubmitPrompt = async (event) => {
@@ -55,14 +78,29 @@ export default function PlanBuilder() {
     }
   };
 
+  async function handleLogOut() {
+    await signOutUser();
+
+    navigate("/login");
+  }
+
   return (
     <>
+      {isAuthenticated ? (
+        <Button onClick={handleLogOut}>Log out</Button>
+      ) : (
+        <Link to="/login">
+          <Button>Log in</Button>
+        </Link>
+      )}
       <Header />
       <PromptForm
         promptProps={promptProps}
         handlePromptChange={handlePromptChange}
         handleSubmitPrompt={handleSubmitPrompt}
+        isAuthenticated={isAuthenticated}
       />
+
       <GeneratedContent
         loading={loading}
         error={error}

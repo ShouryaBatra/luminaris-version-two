@@ -17,6 +17,8 @@ import useAuth from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { normalizedError } from "../../src/utils";
+import { authenticateUser } from "@/services/auth";
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z
@@ -30,8 +32,11 @@ const formSchema = z.object({
 });
 
 function Login() {
-  const { loginWithEmail, error } = useAuth();
-  console.log(error);
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,15 +46,25 @@ function Login() {
   });
 
   async function onSubmit(values) {
+    setIsLoading(true);
+    setError(null);
     try {
-      await loginWithEmail({ email: values.email, password: values.password });
+      const { user } = await authenticateUser({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (!!user) navigate("/");
     } catch (error) {
+      setError(error);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: normalizedError(error)?.code,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -85,9 +100,19 @@ function Login() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Link to="/forget-password">
+            <p>Forgot your password?</p>
+          </Link>
+          <Button disabled={isLoading} type="submit">
+            {isLoading ? "Loading..." : "Login"}
+          </Button>
+          {error && <p className="text-red-500">{error.message}</p>}
         </form>
       </Form>
+
+      <Link to="/signup">
+        <p>Don't have an account?</p>
+      </Link>
     </>
   );
 }

@@ -7,31 +7,57 @@ import VerifyEmail from "./routes/VerifyEmail";
 import UpdatePassword from "./routes/UpdatePassword";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AuthGuard from "./components/AuthGuard";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PlanBuilder />,
+    element: (
+      // <ProtectedRoute>
+      <PlanBuilder />
+      // </ProtectedRoute>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <AuthGuard>
+        <Login />
+      </AuthGuard>
+    ),
   },
   {
     path: "/signup",
-    element: <SignUp />,
+    element: (
+      <AuthGuard>
+        <SignUp />
+      </AuthGuard>
+    ),
   },
   {
     path: "/forget-password",
-    element: <ForgetPassword />,
+    element: (
+      <AuthGuard>
+        <ForgetPassword />
+      </AuthGuard>
+    ),
   },
   {
     path: "/verify-email",
-    element: <VerifyEmail />,
+    element: (
+      <AuthGuard>
+        <VerifyEmail />
+      </AuthGuard>
+    ),
   },
   {
     path: "/update-password",
-    element: <UpdatePassword />,
+    element: (
+      <AuthGuard>
+        <UpdatePassword />
+      </AuthGuard>
+    ),
   },
 ]);
 
