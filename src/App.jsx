@@ -6,7 +6,7 @@ import ForgetPassword from "./routes/ForgetPassword";
 import VerifyEmail from "./routes/VerifyEmail";
 import UpdatePassword from "./routes/UpdatePassword";
 import { ThemeProvider } from "@/components/theme-provider";
-
+import { Toaster } from "@/components/ui/toaster";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +39,7 @@ export default function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <RouterProvider router={router} />
+      <Toaster />
     </ThemeProvider>
   );
 }

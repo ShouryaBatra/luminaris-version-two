@@ -22,3 +22,10 @@ export const generateContent = async (prompt) => {
   let text = response.text();
   return text;
 };
+
+export const normalizedError = (error) => {
+  const stringError = JSON.stringify(error);
+  const parsedError = JSON.parse(stringError);
+
+  return parsedError;
+};

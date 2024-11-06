@@ -51,8 +51,8 @@ export default function PromptForm({
           {/* Grade */}
           
           <Select name="grade" onValueChange={handlePromptChange("grade")}>
-            <SelectTrigger className="w-[180px]" >
-              <SelectValue placeholder="Select a fruit" />
+            <SelectTrigger>
+              <SelectValue placeholder="Select a grade" />
             </SelectTrigger>
             <SelectContent >
               <SelectGroup >
@@ -67,8 +67,8 @@ export default function PromptForm({
                 <SelectItem value="8th">8th</SelectItem>
                 <SelectItem value="9th">9th</SelectItem>
                 <SelectItem value="10th">10th</SelectItem>
-                <SelectItem value="11nd">11nd</SelectItem>
-                <SelectItem value="12nd">12nd</SelectItem>
+                <SelectItem value="11th">11th</SelectItem>
+                <SelectItem value="12th">12th</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
