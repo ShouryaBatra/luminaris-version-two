@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
@@ -17,6 +15,27 @@ import {
 } from "@/components/ui/popover";
 import { Link } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
+("use client");
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  username: z.string().min(2).max(50),
+});
 
 export default function PromptForm({
   promptProps,
@@ -24,6 +43,22 @@ export default function PromptForm({
   handleSubmitPrompt,
   isAuthenticated,
 }) {
+  // 1. Define your form.
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "johndoe@gmail.com",
+      password: "password1234",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
+
   return (
     <>
       {/* FORM HTML GOES HERE */}
@@ -101,9 +136,107 @@ export default function PromptForm({
         </div>
       </form>
 
-      {/* <div id="resultBox">
-        <h1>testing 123</h1>
-      </div> */}
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleSubmitPrompt)}
+          className="space-y-8"
+        >
+          {/* SUBJECT */}
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Subject (e.g Math, Science...)"
+                    {...field}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* SUB-MODULE */}
+          <FormField
+            control={form.control}
+            name="subModule"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Sub-Module</FormLabel>
+                <FormControl>
+                  <Input placeholder="Sub-Module (e.g Rev War)" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* GRADE */}
+          <FormField
+            control={form.control}
+            name="grade"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Grade</FormLabel>
+                <FormControl>
+                  <Select
+                    name="grade"
+                    onValueChange={handlePromptChange("grade")}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a grade" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Grades</SelectLabel>
+                        <SelectItem value="1st">1st</SelectItem>
+                        <SelectItem value="2nd">2nd</SelectItem>
+                        <SelectItem value="3rd">3rd</SelectItem>
+                        <SelectItem value="4th">4th</SelectItem>
+                        <SelectItem value="5th">5th</SelectItem>
+                        <SelectItem value="6th">6th</SelectItem>
+                        <SelectItem value="7th">7th</SelectItem>
+                        <SelectItem value="8th">8th</SelectItem>
+                        <SelectItem value="9th">9th</SelectItem>
+                        <SelectItem value="10th">10th</SelectItem>
+                        <SelectItem value="11th">11th</SelectItem>
+                        <SelectItem value="12th">12th</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* DURATION */}
+          <FormField
+            control={form.control}
+            name="duration"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Duration</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Duration of Lesson (e.g 3 Weeks)"
+                    {...field}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Generate</Button>
+        </form>
+      </Form>
     </>
   );
 }

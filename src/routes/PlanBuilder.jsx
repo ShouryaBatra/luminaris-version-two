@@ -45,14 +45,13 @@ export default function PlanBuilder() {
   }, []);
 
   function handlePromptChange(name, event) {
-    // const name = event.target.name;
-    // // console.log(`name`, name);
-    // const value = event.target.value;
-    // setPromptProps((prev) => ({
-    //   ...prev,
-    //   [name]: event,
-    // }));
-    console.log(event);
+    const name = event.target.name;
+    // console.log(`name`, name);
+    const value = event.target.value;
+    setPromptProps((prev) => ({
+      ...prev,
+      [name]: event,
+    }));
   }
 
   const handleSubmitPrompt = async (event) => {

@@ -1,13 +1,9 @@
 export default function Header() {
-    return (
-        <>
-            <h1>Your Tutoring Experience: Welcome to Luminaris! </h1>
-            <h2> Your AI tutor, anytime, anywhere.</h2>
-
-
-        </>
-    )
-
-
-
+  return (
+    <>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        Luminaris
+      </h1>
+    </>
+  );
 }
