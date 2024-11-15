@@ -9,6 +9,16 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthGuard from "./components/AuthGuard";
+import Header from "./components/Header/Header";
+
+function AuthLayout({ children }) {
+  return (
+    <div className="mt-10">
+      <Header />
+      <div className="w-1/4 mx-auto mt-20">{children}</div>
+    </div>
+  );
+}
 
 const router = createBrowserRouter([
   {
@@ -23,7 +33,9 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <AuthGuard>
-        <Login />
+        <AuthLayout title="Login title">
+          <Login />
+        </AuthLayout>
       </AuthGuard>
     ),
   },
@@ -31,7 +43,9 @@ const router = createBrowserRouter([
     path: "/signup",
     element: (
       <AuthGuard>
-        <SignUp />
+        <AuthLayout>
+          <SignUp />
+        </AuthLayout>
       </AuthGuard>
     ),
   },
@@ -39,7 +53,9 @@ const router = createBrowserRouter([
     path: "/forget-password",
     element: (
       <AuthGuard>
-        <ForgetPassword />
+        <AuthLayout>
+          <ForgetPassword />
+        </AuthLayout>
       </AuthGuard>
     ),
   },
@@ -47,7 +63,9 @@ const router = createBrowserRouter([
     path: "/verify-email",
     element: (
       <AuthGuard>
-        <VerifyEmail />
+        <AuthLayout>
+          <VerifyEmail />
+        </AuthLayout>
       </AuthGuard>
     ),
   },

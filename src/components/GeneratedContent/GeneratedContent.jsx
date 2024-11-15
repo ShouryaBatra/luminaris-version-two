@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import "./GeneratedContent.css";
 import {
   Card,
   CardContent,
@@ -12,7 +11,18 @@ import {
 
 export default function Results({ content, loading, error }) {
   if (loading) {
-    return <p>Generating...</p>;
+    return (
+      <div className="prose dark:prose-invert">
+        <Card>
+          {/* <CardHeader>
+            <CardTitle>Your Plan</CardTitle>
+          </CardHeader> */}
+          <CardContent>
+            <ReactMarkdown>Generating...</ReactMarkdown>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   if (error) {
@@ -20,20 +30,18 @@ export default function Results({ content, loading, error }) {
   }
 
   if (!content) {
-    return <p>No results found!</p>;
+    return <p>Need to generate a plan first!</p>;
   }
 
   return (
-    <div className="prose dark:prose-invert">
-      <Card>
+    <div className="prose dark:prose-invert min-w-full justify-center">
+      <Card className="">
         <CardHeader>
           <CardTitle>Your Plan</CardTitle>
         </CardHeader>
         <CardContent>
           <ReactMarkdown>{content}</ReactMarkdown>
-
         </CardContent>
-        
       </Card>
     </div>
   );

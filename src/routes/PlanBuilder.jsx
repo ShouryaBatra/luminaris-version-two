@@ -13,10 +13,10 @@ import { supabase } from "@/lib/supabase";
 export default function PlanBuilder() {
   const navigate = useNavigate();
   const [promptProps, setPromptProps] = useState({
-    subject: "Mathematics",
-    subModule: "Algebra",
-    duration: "1 month",
-    grade: "8th",
+    subject: "",
+    subModule: "",
+    duration: "",
+    grade: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -44,18 +44,21 @@ export default function PlanBuilder() {
     getSession();
   }, []);
 
-  function handlePromptChange(name, event) {
-    const name = event.target.name;
-    // console.log(`name`, name);
-    const value = event.target.value;
+  function handlePromptChange(event) {
+    if (!event) return;
+
+    if (!event?.target) return;
+
+    const { name, value } = event?.target;
     setPromptProps((prev) => ({
       ...prev,
-      [name]: event,
+      [name]: value,
     }));
   }
 
   const handleSubmitPrompt = async (event) => {
-    event.preventDefault();
+    console.log(`promptProps`, promptProps);
+
     // 1. build the prompt
     const prompt = createStudyPlanPromptBuilder(promptProps);
     // 2. Start loading and clear error
@@ -85,26 +88,24 @@ export default function PlanBuilder() {
 
   return (
     <>
-      {isAuthenticated ? (
-        <Button onClick={handleLogOut}>Log out</Button>
-      ) : (
-        <Link to="/login">
-          <Button>Log in</Button>
-        </Link>
-      )}
-      <Header />
-      <PromptForm
-        promptProps={promptProps}
-        handlePromptChange={handlePromptChange}
-        handleSubmitPrompt={handleSubmitPrompt}
-        isAuthenticated={isAuthenticated}
-      />
-
-      <GeneratedContent
-        loading={loading}
-        error={error}
-        content={generatedContent ?? dummyContent}
-      />
+      <div className="flex flex-col items-center gap-4 px-4">
+        <Header
+          isAuthenticated={isAuthenticated}
+          handleLogOut={handleLogOut}
+          withBtn
+        />
+        <PromptForm
+          promptProps={promptProps}
+          handlePromptChange={handlePromptChange}
+          handleSubmitPrompt={handleSubmitPrompt}
+          isAuthenticated={isAuthenticated}
+        />
+        <GeneratedContent
+          loading={loading}
+          error={error}
+          content={generatedContent}
+        />
+      </div>
     </>
   );
 }
