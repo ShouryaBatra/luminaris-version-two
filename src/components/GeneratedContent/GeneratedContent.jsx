@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function Results({ content, loading, error }) {
+export default function GeneratedContent({ content, loading, error }) {
   if (loading) {
     return (
       <div className="prose dark:prose-invert">
@@ -30,7 +30,7 @@ export default function Results({ content, loading, error }) {
   }
 
   if (!content) {
-    return <p>Need to generate a plan first!</p>;
+    return <p></p>;
   }
 
   return (

@@ -110,7 +110,14 @@ export default function PromptForm({
                 <FormItem>
                   <FormLabel>Sub-Module</FormLabel>
                   <FormControl>
-                    <Input placeholder="Sub-Module (e.g Rev War)" {...field} />
+                    <Input
+                      placeholder="Sub-Module (e.g Rev War)"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        onFieldChange("subModule", e.target.value);
+                      }}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -131,7 +138,7 @@ export default function PromptForm({
                       name="grade"
                       onValueChange={(value) => {
                         field.onChange(value);
-                        handlePromptChange("grade");
+                        onFieldChange("grade", value);
                       }}
                     >
                       <SelectTrigger>
@@ -173,6 +180,10 @@ export default function PromptForm({
                     <Input
                       placeholder="Duration of Lesson (e.g 3 Weeks)"
                       {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        onFieldChange("duration", e.target.value);
+                      }}
                     />
                   </FormControl>
 

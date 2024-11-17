@@ -61,6 +61,7 @@ export default function PlanBuilder() {
 
     // 1. build the prompt
     const prompt = createStudyPlanPromptBuilder(promptProps);
+    // console.log(promptProps);
     // 2. Start loading and clear error
     setError(null);
     setLoading(true);
