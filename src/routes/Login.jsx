@@ -40,8 +40,8 @@ function Login() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "johndoe@gmail.com",
-      password: "password1234",
+      email: "",
+      password: "",
     },
   });
 
@@ -79,7 +79,7 @@ function Login() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g johndoe@gmail.com." {...field} />
+                  <Input placeholder="e.g johndoe@gmail.com" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -93,7 +93,7 @@ function Login() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="more than 8 characters." {...field} />
+                  <Input placeholder="more than 8 characters" {...field} />
                 </FormControl>
 
                 <FormMessage />
