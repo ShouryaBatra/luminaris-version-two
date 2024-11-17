@@ -7,7 +7,7 @@ export default function Header({
   withBtn = false,
 }) {
   return (
-    <div className="flex flex-row-reverse w-full justify-between items-center">
+    <div className="flex flex-row-reverse w-full justify-between items-center mt-3">
       <h1 className="absolute  left-1/2 transform -translate-x-1/2 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl flex justify-center">
         Luminaris
       </h1>
