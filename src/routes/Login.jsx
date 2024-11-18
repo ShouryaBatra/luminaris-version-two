@@ -93,7 +93,11 @@ function Login() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="more than 8 characters" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="more than 8 characters"
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
