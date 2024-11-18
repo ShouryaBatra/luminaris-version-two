@@ -23,10 +23,6 @@ This tool is designed to streamline the planning process for educators, allowing
 - **Modern UI Design**: Built with Tailwind CSS and Shadcn UI for an intuitive user interface.
 - **Fast and Reliable**: Developed using Vite for blazing-fast performance and a Supabase backend for secure and scalable data management.
 
-## Contributing
-
-We welcome contributions! Please open an issue or submit a pull request to help improve Luminaris.  
-
 ---
 
 ## Developers
