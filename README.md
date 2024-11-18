@@ -28,7 +28,8 @@ This tool is designed to streamline the planning process for educators, allowing
 ## Developers
 
 **[Shourya Batra](https://github.com/ShouryaBatra)**  
-Shourya is a freshman at Homestead High School currently pursuing his passion for computer science. He independently developed version 2.0 of Luminaris, showcasing his commitment to innovation and technology.  
+
+- Shourya is a freshman at Homestead High School currently pursuing his passion for computer science. He independently developed version 2.0 of Luminaris, showcasing his commitment to innovation and technology.  
 
 ---
 
