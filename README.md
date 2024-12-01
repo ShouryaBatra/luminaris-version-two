@@ -1,6 +1,6 @@
 # Luminaris
 
-Want to try? Heres the link: https://luminaris-version-two.vercel.app/login
+Want to try? Heres the link: https://luminaris-version-two.vercel.app/
 
 **Luminaris** is a cutting-edge application designed to simplify lesson planning using AI. This repository contains version 2.0 of Luminaris, an improved iteration of the original [bay-hacks-project](https://github.com/ShouryaBatra/bay-hacks-project).
 
