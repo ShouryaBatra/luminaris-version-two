@@ -53,12 +53,11 @@ function SignUp() {
         email: values.email,
         password: values.password,
       });
-      toast({
-        variant: "destructive",
-        title: "Check email for verification link!",
-        description: normalizedError(error)?.code,
-        action: <ToastAction altText="Try again">Try again</ToastAction>,
-      });
+      // toast({
+      //   title: "Check email for verification link!",
+      //   action: <ToastAction altText="Try again">Try again</ToastAction>,
+      // });
+      navigate("/verify-email");
     } catch (error) {
       setError(error);
       toast({
